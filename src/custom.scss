@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@700&display=swap');
+$body-bg: #c0f5c0;
+$primary: purple;
+$font-family-sans-serif: 'Playfair Display', serif;
+
+
+h2 {
+	font-family: 'Poppins';
+	font-size: large;
+	color: red;
+}
+// @use 'variables'
+@import '~bootstrap/scss/bootstrap.scss';
+// @import './blue.scss'
+// @import './bootstrap.min.css'
