@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import './custom.scss';
 import { firebaseConfig } from "./components/fbAuth/firebaseConfig";
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 
 firebase.initializeApp(firebaseConfig);
 

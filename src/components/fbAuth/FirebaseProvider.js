@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import { Spinner } from "react-bootstrap";
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/auth";
 /*
     The context is imported and used by individual components
@@ -45,6 +45,17 @@ export const FirebaseProvider = (props) => {
       });
   };
 
+  const register = (userProfile, password) => {
+    return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
+      .then(savedUserProfile => {
+        console.log('savedU', savedUserProfile)
+        sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile.user))
+        setIsLoggedIn(true);
+      });
+  };
+
+  
+
   const signInWithGoogle = () => {
     return firebase.auth().signInWithPopup(provider)
       .then(savedUserProfile => {
@@ -55,14 +66,7 @@ export const FirebaseProvider = (props) => {
   }
 
 
-  const register = (userProfile, password) => {
-    return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
-      .then(savedUserProfile => {
-        console.log('savedU', savedUserProfile)
-        sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile.user))
-        setIsLoggedIn(true);
-      });
-  };
+  
 
 
   /*
