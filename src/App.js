@@ -1,11 +1,22 @@
-import { ChrisList } from './components/journal/ChrisList'
+import React from 'react';
+import { BrowserRouter as Router } from "react-router-dom";
+import ApplicationViews from "./components/ApplicationViews";
+import { Header } from "./components/Header";
+import { FirebaseProvider } from "./components/fbAuth/FirebaseProvider";
 
 
 function App() {
+
   return (
     <div className="App">
       <h1>All I want for Christmas...</h1>
-      <ChrisList />
+      <Router>
+        <FirebaseProvider>
+          <Header />
+          <ApplicationViews />
+        </FirebaseProvider>
+      </Router>
+
     </div>
   );
 }
