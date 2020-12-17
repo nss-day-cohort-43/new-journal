@@ -10,3 +10,36 @@
 // Import custom styles
 // @import "./scss/now-ui-kit.scss";
 
+.header-nav {
+  background-color: lightgreen;
+  padding: .5em;
+  display: flex;
+  justify-content: flex-end;
+  min-height: 2.85em;
+  background: repeating-linear-gradient(45deg, #fdd3e7, #d8a2d3 10px, #de7e83 10px, #ffffff 20px);
+}
+
+.login-options {
+  // display: flex;
+  // justify-content: space-evenly;
+  max-width: 340px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+main h3 {
+  max-width: 340px;
+  margin: 0.5rem auto;
+
+}
+
+
+.border-option {
+  border-width: .2rem .2rem 0;
+    border-radius: 8px 8px 0 0;
+    padding: 1rem;
+    border: .2rem solid #ececec;
+    margin-right: 0;
+    margin-left: 0;
+    color: #212529;
+}
