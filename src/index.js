@@ -7,6 +7,9 @@ import { firebaseConfig } from "./components/fbAuth/firebaseConfig";
 import firebase from "firebase/app";
 
 firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+console.log("auth", auth);
 
 ReactDOM.render(
   <React.StrictMode>

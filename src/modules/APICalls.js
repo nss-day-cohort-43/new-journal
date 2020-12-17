@@ -1,6 +1,9 @@
-const dataURL = "https://christmasjournal-d3efa.firebaseio.com"
+import firebase from "firebase/app";
+const dataURL = "https://christmasjournal-d3efa.firebaseio.com";
 
 export const getAll = () => {
+	
+	console.log("auth", firebase.auth())
 	return fetch(`${dataURL}/christList.json`)
 	.then(response => response.json())
 }
@@ -10,9 +13,18 @@ const testItem = {
 	"fbid": "-MNiY3kW3_nn_Jpn8HR8"
 }
 
-
+export const addItem = (itemObj) => {
+	return fetch(`${dataURL}/christList.json`,{
+		method:"POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(itemObj)
+	})
+}
 
 export const updateChristList = (listObj) => {
+
 	//remove fbid from listObj
 	const updatedObj = {
 		"title": listObj.title
@@ -27,4 +39,4 @@ export const updateChristList = (listObj) => {
 	
 }
 
-updateChristList(testItem);
+// updateChristList(testItem);
