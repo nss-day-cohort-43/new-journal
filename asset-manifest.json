@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/nss-day-cohort-43.github.io/new-journal/static/css/main.ec6b5b03.chunk.css",
+    "main.js": "/nss-day-cohort-43.github.io/new-journal/static/js/main.a4122223.chunk.js",
+    "main.js.map": "/nss-day-cohort-43.github.io/new-journal/static/js/main.a4122223.chunk.js.map",
+    "runtime-main.js": "/nss-day-cohort-43.github.io/new-journal/static/js/runtime-main.f0e78bff.js",
+    "runtime-main.js.map": "/nss-day-cohort-43.github.io/new-journal/static/js/runtime-main.f0e78bff.js.map",
+    "static/js/2.ba23f187.chunk.js": "/nss-day-cohort-43.github.io/new-journal/static/js/2.ba23f187.chunk.js",
+    "static/js/2.ba23f187.chunk.js.map": "/nss-day-cohort-43.github.io/new-journal/static/js/2.ba23f187.chunk.js.map",
+    "index.html": "/nss-day-cohort-43.github.io/new-journal/index.html",
+    "static/css/main.ec6b5b03.chunk.css.map": "/nss-day-cohort-43.github.io/new-journal/static/css/main.ec6b5b03.chunk.css.map",
+    "static/js/2.ba23f187.chunk.js.LICENSE.txt": "/nss-day-cohort-43.github.io/new-journal/static/js/2.ba23f187.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f0e78bff.js",
+    "static/js/2.ba23f187.chunk.js",
+    "static/css/main.ec6b5b03.chunk.css",
+    "static/js/main.a4122223.chunk.js"
+  ]
+}
