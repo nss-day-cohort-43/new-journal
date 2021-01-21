@@ -11,28 +11,27 @@ export const Header = () => {
   const { isLoggedIn, logout } = useContext(FirebaseContext);
   //do i need the following state with router?
   const [expanded, setExpanded] = useState(false);
-  // <Nav.Item><Nav.Link onClick={() => setExpanded(false)} href="/">how do i look 1</Nav.Link></Nav.Item>
-  // <Nav.Item><Nav.Link href="/">how do i look</Nav.Link></Nav.Item>
-  // <Nav.Item><Nav.Link href="/">how do i look</Nav.Link></Nav.Item>
+ 
 
   return (
     <>
-      <Navbar bg="light" expand="lg" className="xheader-nav">
+      <Navbar bg="light" expand="lg" expanded={expanded} className="header-nav">
         <Navbar.Brand href="/">All I Want For Christmas</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav" >
-          <Nav className="ml-auto navbar-nav">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")}/>
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ml-auto navbar-nav" activeKey="/home" onClick={() => setExpanded(false)}> 
             {isLoggedIn &&
               <>
-
-                <Nav.Item ><RRNavLink className="nav-link" to="/">Home</RRNavLink></Nav.Item>
-                <Nav.Item><RRNavLink className="nav-link justify-content-start" to="/list">Show All</RRNavLink></Nav.Item>
+                <Nav.Item><RRNavLink className="nav-link" to="/home">Home</RRNavLink></Nav.Item>
+                <Nav.Item><RRNavLink className="nav-link " to="/list">Show All</RRNavLink></Nav.Item>
+                <Nav.Item><RRNavLink className="nav-link " to="/add">Add</RRNavLink></Nav.Item>
+                <Button onClick={logout} variant="outline-dark" size="sm">Logout</Button>
               </>
             }
-            <Button onClick={logout} variant="outline-dark" size="sm">Logout</Button>
+            {!isLoggedIn &&
+              <p>Login to make a list</p>
+            }
           </Nav>
-
-
         </Navbar.Collapse>
       </Navbar>
     </>
