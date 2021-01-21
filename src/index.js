@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import './custom.scss';
+
+
 import { firebaseConfig } from "./components/fbAuth/firebaseConfig";
 import firebase from "firebase/app";
 

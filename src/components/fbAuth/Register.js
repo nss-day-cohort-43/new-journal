@@ -25,7 +25,7 @@ export default function Register() {
 
   return (
     <>
-      <h3>Register To Start Your Christmas List</h3>
+      <h3>Create Your Chris-List Account</h3>
       <div className="login-options">
         <div className="border-option">
           <Form onSubmit={registerClick}>
@@ -33,12 +33,12 @@ export default function Register() {
 
               <Form.Group>
                 <Form.Label>Name</Form.Label>
-                <Form.Control id="name" type="text" onChange={e => setName(e.target.value)} />
+                 <Form.Control placeholder="User Name" id="name" type="text" onChange={e => setName(e.target.value)} />
               </Form.Group>
 
               <Form.Group controlId="email">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="text" onChange={e => setEmail(e.target.value)} />
+                <Form.Control type="text" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} />
                 <Form.Text className="text-muted">
                   We'll never share your email with anyone else.
           </Form.Text>
@@ -46,22 +46,22 @@ export default function Register() {
 
               <Form.Group controlId="password">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+                <Form.Control type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
               </Form.Group>
 
 
               <Form.Group controlId="confirmPassword">
                 <Form.Label>Confirm Password</Form.Label>
-                <Form.Control type="password" onChange={e => setConfirmPassword(e.target.value)} />
+                <Form.Control type="password" placeholder="Confirm password" onChange={e => setConfirmPassword(e.target.value)} />
               </Form.Group>
 
-              <Button variant="primary" type="submit">Register</Button>
+              <Button variant="primary" type="submit">Continue</Button>
             </fieldset>
           </Form>
           <div>
             <hr />
             <em>
-              Already have an account? <Link to="login">Login</Link>
+              Already have an account? <Link to="login">Sign in ></Link>
             </em>
           </div>
         </div>
