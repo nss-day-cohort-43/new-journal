@@ -5,7 +5,7 @@ import { FirebaseContext } from "./fbAuth/FirebaseProvider";
 
 /*
 when using react-router-dom and react-bootstrap, need to manually add classes
-For example <RRNavLink> needs the react-bootstrap classes added for spacing
+For example <RRNavLink> needs the specific react-bootstrap classes added for spacing
 */
 export const Header = () => {
   const { isLoggedIn, logout } = useContext(FirebaseContext);
@@ -23,8 +23,8 @@ export const Header = () => {
             {isLoggedIn &&
               <>
                 <Nav.Item><RRNavLink className="nav-link" to="/home">Home</RRNavLink></Nav.Item>
-                <Nav.Item><RRNavLink className="nav-link " to="/list">Show All</RRNavLink></Nav.Item>
-                <Nav.Item><RRNavLink className="nav-link " to="/add">Add</RRNavLink></Nav.Item>
+                <Nav.Item><RRNavLink className="nav-link " to="/list">My List</RRNavLink></Nav.Item>
+                <Nav.Item><RRNavLink className="nav-link " to="/add">Add Another</RRNavLink></Nav.Item>
                 <Button onClick={logout} variant="outline-dark" size="sm">Logout</Button>
               </>
             }

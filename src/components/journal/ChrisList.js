@@ -11,12 +11,12 @@ export const ChrisList = () => {
 		getAll()
 			.then(data => {
 				console.log("data", data);
-				let newArray = Object.keys(data).map((key, index) => {
-					data[key].fbid = key;
-                     return data[key];
-                  });
-				console.log("newArray", newArray);
-				setJournalArray(newArray)
+				// let newArray = Object.keys(data).map((key, index) => {
+				// 	data[key].fbid = key;
+                //      return data[key];
+                //   });
+				// console.log("newArray", newArray);
+				// setJournalArray(newArray)
 			})
 	}, [])
 

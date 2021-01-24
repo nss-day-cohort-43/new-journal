@@ -17,6 +17,13 @@ export default function ApplicationViews() {
         <Route path="/" exact>
           {isLoggedIn ? <ChrisList /> : <Redirect to="/login" />}
         </Route>
+        <Route path="/home">
+          {isLoggedIn ? <ChrisList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/list">
+          {isLoggedIn ? <ChrisList /> : <Redirect to="/login" />}
+        </Route>
 
         <Route path="/add">
           {isLoggedIn ? <ChrisListAddForm /> : <Redirect to="/login" />}

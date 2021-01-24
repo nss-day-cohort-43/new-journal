@@ -18,7 +18,7 @@ export const FirebaseProvider = (props) => {
   const [isFirebaseReady, setIsFirebaseReady] = useState(false);
 
   const provider = new firebase.auth.GoogleAuthProvider();
-
+//https://firebase.google.com/docs/auth/web/start?authuser=0
   useEffect(() => {
     firebase.auth().onAuthStateChanged((u) => {
       setIsFirebaseReady(true);
