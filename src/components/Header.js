@@ -15,7 +15,7 @@ export const Header = () => {
 
   return (
     <>
-      <Navbar bg="light" expand="lg" expanded={expanded} className="header-nav">
+      <Navbar bg="primary" expand="lg" expanded={expanded} className="navbar-dark">
         <Navbar.Brand href="/">All I Want For Christmas</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")}/>
         <Navbar.Collapse id="basic-navbar-nav">

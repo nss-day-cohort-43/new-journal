@@ -12,15 +12,14 @@ export const getAll = () => {
 	
 	// https://firebase.google.com/docs/database/rest/retrieve-data?authuser=0
 	// combine orderBy with any of the other five parameters: limitToFirst, limitToLast, startAt, endAt, and equalTo
-	return fetch(`${dataURL}/christList.json/?orderBy="uid"&equalTo="${firebase.auth().currentUser.uid}"`,{
-		"access_token": firebase.auth().currentUser.getAccessToken()
-	})
+
+	return fetch(`${dataURL}/christList.json/?orderBy="uid"&equalTo="${firebase.auth().currentUser.uid}"`)
 	.then(response => response.json())
 	
 }
 
-
 export const addItem = (itemObj) => {
+	console.log("itemO", itemObj);
 	return fetch(`${dataURL}/christList.json`,{
 		method:"POST",
 		headers: {
@@ -43,25 +42,5 @@ export const updateChristList = (listObj) => {
 			"Content-Type": "application/json"
 		},
 		body: JSON.stringify(updatedObj)
-	})
-	
+	})	
 }
-
-/*
-const dataURL = "https://christmasjournal-d3efa.firebaseio.com";
-  console.log("token", firebase.auth().currentUser.getIdToken(true).then(token => token))
-  const testItem = () => {
-    const itemObj = {
-      title:"Yeah2",
-      uid: firebase.auth().currentUser.uid
-    }
-    return fetch(`${dataURL}/christList.json`,{
-      method:"POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth": firebase.auth().currentUser.getIdToken(true)
-      },
-      body: JSON.stringify(itemObj)
-    })
-  }
-  */

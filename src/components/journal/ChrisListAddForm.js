@@ -2,51 +2,45 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import firebase from "firebase";
 import { addItem } from "./../../modules/APICalls";
-import { Form, Button, InputGroup, FormControl } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 export const ChrisListAddForm = () => {
 
   const [chrisItem, setChrisItem] = useState({});
   const history = useHistory();
 
-  console.log("current user uid", firebase.auth().currentUser.uid);
-
-  const updateChrisItem = (event) => {
-    const newItem = { ...chrisItem };
-    newItem[event.target.id] = event.target.value;
-    setChrisItem(newItem);
+  const handleInputChange = (event) => {
+    const newItemObj = { ...chrisItem };
+    newItemObj[event.target.id] = event.target.value;
+    setChrisItem(newItemObj);
   }
 
-  const handleAddItem = (event) => {
-    const itemObj = { ...chrisItem };
-    itemObj.uid = firebase.auth().currentUser.uid;
-    itemObj.timestamp = Date.now()
-    addItem(chrisItem)
+  const handleAddItem = () => {
+    const newItemObj = { ...chrisItem };
+    newItemObj.uid = firebase.auth().currentUser.uid;
+    newItemObj.timestamp = Date.now();
+    addItem(newItemObj)
       .then(response => history.push("/"))
   }
 
 
-
-
-
   return (
     <>
-      <h4>Add To My Christmas List</h4>
-      <Form>
-        <Form.Group controlId="title">
-          <Form.Label>Title</Form.Label>
-          <Form.Control type="text" placeholder="Name of item" />
-        </Form.Group>
-        <Form.Group controlId="formGroupPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="text" placeholder="Password" />
-        </Form.Group>
-        <InputGroup>
-          <InputGroup.Prepend>
-            <InputGroup.Text>With textarea</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl as="textarea" aria-label="With textarea" />
-        </InputGroup>
+      <h4>Another One</h4>
+      <Form onChange={handleInputChange}>
+        <Form.Group controlId="title" className="mb-3">
+        <Form.Label>Title</Form.Label>
+        <Form.Control type="text" placeholder="A lego truck with a real horn" />
+        <Form.Text className="text-muted">
+          For best results, be specific
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group controlId="details">
+        <Form.Label>Details</Form.Label>
+        <Form.Control as="textarea" rows={3} />
+      </Form.Group>
+
         <Button onClick={handleAddItem}>Add To List</Button>
       </Form>
 
