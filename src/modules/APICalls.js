@@ -26,21 +26,39 @@ export const addItem = (itemObj) => {
 			"Content-Type": "application/json"
 		},
 		body: JSON.stringify(itemObj)
+	}).then(response => response.json())
+	.then(parsedResponse => {
+		console.log("response", parsedResponse);
 	})
 }
 
-export const updateChristList = (listObj) => {
-
+export const updateGotIt = (itemObj) => {
 	//we don't want to add the firebase key to the item object on firebase(duplication of data) so, 
-	//make a new object without the fbid
-	const updatedObj = {
-		"title": listObj.title
-	}
-	return fetch(`${dataURL}/christList/${listObj.fbid}.json`,{
+	//make a reference to the fbid and then remove it from the object
+	const fbid = itemObj.fbid;
+	delete itemObj.fbid;
+
+	return fetch(`${dataURL}/christList/${fbid}.json`,{
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json"
 		},
-		body: JSON.stringify(updatedObj)
+		body: JSON.stringify(itemObj)
+	})	
+}
+
+export const updateChristList = (itemObj) => {
+
+	//we don't want to add the firebase key to the item object on firebase(duplication of data) so, 
+	//make a reference to the fbid and then remove it from the object
+	const fbid = itemObj.fbid;
+	delete itemObj.fbid;
+
+	return fetch(`${dataURL}/christList/${fbid}.json`,{
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(itemObj)
 	})	
 }

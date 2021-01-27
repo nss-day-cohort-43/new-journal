@@ -12,6 +12,7 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Montserrat" !default;
 @import "bootstrap/scss/bootstrap.scss";
 
 // Import any custom styles
+@import "./checkbox.scss";
 
 // Navbar ======================================================================
 
@@ -330,6 +331,16 @@ legend {
     color: inherit;
   }
 }
-// h5 {
-//   color: #888;
-// }
+
+.card-body {
+  width: 100%;
+}
+.card {
+  flex-direction: row;
+}
+
+.username {
+  color: $primary;
+  margin-top: .5em;
+  font-weight: 800;
+}

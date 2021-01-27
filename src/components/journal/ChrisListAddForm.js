@@ -19,6 +19,7 @@ export const ChrisListAddForm = () => {
     const newItemObj = { ...chrisItem };
     newItemObj.uid = firebase.auth().currentUser.uid;
     newItemObj.timestamp = Date.now();
+    newItemObj.gotIt = false;
     addItem(newItemObj)
       .then(response => history.push("/"))
   }
