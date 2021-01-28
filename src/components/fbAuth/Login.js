@@ -28,34 +28,31 @@ export default function Login() {
 
     <>
     <Container fluid="xl">
-    
-    
-      <Row >
+      <Row>
         <Col className="m-2" md={6}>
         <h5 className="username">Please sign in.</h5>
-          <Form onSubmit={loginSubmit} >
-            <fieldset>
-              <Form.Group controlId="formBasicEmail" class="mb-2">
-                <Form.Control type="email" placeholder="Email Address" onChange={e => setEmail(e.target.value)} />
-              </Form.Group>
+        <Form onSubmit={loginSubmit} >
+          <fieldset>
+            <Form.Group controlId="formBasicEmail" class="mb-2">
+              <Form.Control type="email" placeholder="Email Address" onChange={e => setEmail(e.target.value)} />
+            </Form.Group>
 
-              <Form.Group controlId="formBasicPassword">
-                <Form.Control type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-              </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Control type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+            </Form.Group>
 
-              <Button variant="primary" type="submit">Sign In</Button>
-              
-            </fieldset>
-          </Form>
-        </Col>
+            <Button variant="primary" type="submit">Sign In</Button>
+            
+          </fieldset>
+        </Form>
+      </Col>
 
         <Col className="m-2">
         <h5 className="username">
             Need an account? 
         </h5>
           <Link to="register" className="btn btn-block btn-outline-success">Create one with your email</Link>
-          
-            <Button block onClick={loginGoogle} variant="outline-success">Continue with Google</Button>
+          <Button block onClick={loginGoogle} variant="outline-success">Continue with Google</Button>
          
        </Col>
       </Row>

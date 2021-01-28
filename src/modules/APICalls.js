@@ -1,6 +1,8 @@
 import firebase from "firebase/app";
 const dataURL = "https://christmasjournal-d3efa.firebaseio.com";
 
+//https://firebase.google.com/docs/reference/rest/database
+
 export const getAll = () => {
 	//in the rules section of your Firebase Database, be sure to include 'indexOn` for the properties you will need for selection
 	// for example: only return items with a specific uid
@@ -19,7 +21,6 @@ export const getAll = () => {
 }
 
 export const addItem = (itemObj) => {
-	console.log("itemO", itemObj);
 	return fetch(`${dataURL}/christList.json`,{
 		method:"POST",
 		headers: {
@@ -27,9 +28,6 @@ export const addItem = (itemObj) => {
 		},
 		body: JSON.stringify(itemObj)
 	}).then(response => response.json())
-	.then(parsedResponse => {
-		console.log("response", parsedResponse);
-	})
 }
 
 export const updateGotIt = (itemObj) => {
@@ -61,4 +59,16 @@ export const updateChristList = (itemObj) => {
 		},
 		body: JSON.stringify(itemObj)
 	})	
+}
+
+export const deleteItem = (itemFBID) => {
+	return fetch(`${dataURL}/christList/${itemFBID}.json`,{
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json"
+		},
+	}).then(response => {
+		//should return 200 OK HTTP status code
+		return response.status
+	})
 }

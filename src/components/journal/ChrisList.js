@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container } from 'react-bootstrap';
-import { getAll, updateGotIt } from './../../modules/APICalls';
+import { getAll, updateGotIt, deleteItem } from './../../modules/APICalls';
 import firebase from "firebase";
-import {ChrisItem} from "./ChrisItem"
+import { ChrisItem } from "./ChrisItem"
 
 export const ChrisList = () => {
 
 	const [journalArray, setJournalArray] = useState([])
-	
+
 	const iGotIt = (item) => {
 		updateGotIt(item)
-		.then(() => {
-			getAllJournalEntries();
-		});
-		
+			.then(() => {
+				getAllJournalEntries();
+			});
+
+	}
+
+	const deleteThisItem = (fbid) => {
+		deleteItem(fbid)
+			.then(status => {
+				if (status === 200){
+					getAllJournalEntries();
+				}else {
+					console.log("oops, error here")
+				}
+			})
 	}
 
 	const getAllJournalEntries = () => {
@@ -25,10 +36,12 @@ export const ChrisList = () => {
 				console.log("fb data", data);
 				let arrayWithFBID = Object.keys(data).map((key, index) => {
 					data[key].fbid = key;
-                     return data[key];
-				  });
-				  //now take a look after
+					return data[key];
+				});
+				//now take a look after
 				console.log("arrayWithFBID", arrayWithFBID);
+				//and sort with most recent date first
+				arrayWithFBID.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1)
 				setJournalArray(arrayWithFBID)
 			})
 	}
@@ -38,36 +51,36 @@ export const ChrisList = () => {
 	}, [])
 
 	//cycle through the colors for each card
-	const colorArray = ['Secondary', 'Success','Danger','Warning','Info']
+	const colorArray = ['Secondary', 'Success', 'Danger', 'Warning', 'Info']
 
 	let colorCount = 0;
 
 	const cyleBackgroundColor = () => {
 		const variant = colorArray[colorCount];
-		colorCount < colorArray.length ? colorCount++ : colorCount = 0;
+		colorCount < colorArray.length - 1 ? colorCount++ : colorCount = 0;
 		return variant.toLowerCase()
 	}
-	
+
 
 	return (
 		<>
-			
+
 			<Container fluid="xl">
-			<h5 className="username">{firebase.auth().currentUser.displayName.split(" ")[0]}'s List</h5>
-			<Col className="m-2">
-				{
-					journalArray.map(item => {
-						const mybgcolor = cyleBackgroundColor();
-						
-						return (
-							<ChrisItem item={item} bgcolor={mybgcolor} key={item.fbid} iGotIt={iGotIt}/>
-							
-							
-						)
-					})
-					
-				}
-					
+				<h5 className="username">{firebase.auth().currentUser.displayName.split(" ")[0]}'s List</h5>
+				<Col className="m-2">
+					{
+						journalArray.map(item => {
+							const mybgcolor = cyleBackgroundColor();
+
+							return (
+								<ChrisItem item={item} bgcolor={mybgcolor} key={item.fbid} iGotIt={iGotIt} deleteThisItem={deleteThisItem} />
+
+
+							)
+						})
+
+					}
+
 				</Col>
 			</Container>
 		</>
