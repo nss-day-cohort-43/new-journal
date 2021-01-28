@@ -1,5 +1,8 @@
 import firebase from "firebase/app";
-const dataURL = "https://christmasjournal-d3efa.firebaseio.com";
+import { firebaseConfig } from "./../components/fbAuth/firebaseConfig";
+
+
+const dataURL = firebaseConfig.databaseURL;
 
 //https://firebase.google.com/docs/reference/rest/database
 

@@ -66,9 +66,6 @@ export const FirebaseProvider = (props) => {
   }
 
 
-  
-
-
   /*
     You return a context provider
     allow any child elements to access them.

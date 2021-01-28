@@ -12,7 +12,6 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
 ReactDOM.render(
-
     <App />,
   document.getElementById('root')
 );
