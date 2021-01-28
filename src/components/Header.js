@@ -19,17 +19,17 @@ export const Header = () => {
         <Navbar.Brand href="/">All I Want For Christmas</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")}/>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto navbar-nav" activeKey="/home" onClick={() => setExpanded(false)}> 
+          <Nav className="ml-auto navbar-nav " activeKey="/home" onClick={() => setExpanded(false)}> 
             {isLoggedIn &&
               <>
                 <Nav.Item><RRNavLink className="nav-link" to="/home">Home</RRNavLink></Nav.Item>
-                <Nav.Item><RRNavLink className="nav-link " to="/list">My List</RRNavLink></Nav.Item>
-                <Nav.Item><RRNavLink className="nav-link " to="/add">Add Another</RRNavLink></Nav.Item>
-                <Button onClick={logout} variant="outline-dark" size="sm">Logout</Button>
+                <Nav.Item><RRNavLink className="nav-link" to="/list">My List</RRNavLink></Nav.Item>
+                <Nav.Item><RRNavLink className="nav-link" to="/add">Add Another</RRNavLink></Nav.Item>
+                <Button className="nav-link" variant="link" onClick={logout}  style={{border:"0"}}>Logout</Button>
               </>
             }
             {!isLoggedIn &&
-              <p>Login to make a list</p>
+              <Nav.Item><RRNavLink className="nav-link" to="/login">Login to make your list</RRNavLink></Nav.Item>
             }
           </Nav>
         </Navbar.Collapse>

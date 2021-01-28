@@ -45,7 +45,20 @@ $t: .35s;
 			clip-path: var(--poly);
 			transition: opacity $t, background-position 2*$t $t
 		}
+		
 	}
 	
 	&:not(:checked) + label { --i: 0 }
+
+	&:disabled + label{
+			opacity: 0.2;
+			color: $white;
+		
+			&:before, &:after {
+				background-color: $white;
+				opacity: 1;
+			}
+		
+	}
+	
 }

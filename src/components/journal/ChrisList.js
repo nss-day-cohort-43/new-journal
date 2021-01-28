@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container } from 'react-bootstrap';
-import { getAll } from './../../modules/APICalls';
+import { getAll, updateGotIt } from './../../modules/APICalls';
 import firebase from "firebase";
 import {ChrisItem} from "./ChrisItem"
 
@@ -8,9 +8,15 @@ export const ChrisList = () => {
 
 	const [journalArray, setJournalArray] = useState([])
 	
+	const iGotIt = (item) => {
+		updateGotIt(item)
+		.then(() => {
+			getAllJournalEntries();
+		});
+		
+	}
 
-
-	useEffect(() => {
+	const getAllJournalEntries = () => {
 		getAll()
 			.then(data => {
 				// since our data is returned with a unique key, we need to add it to the object. 
@@ -25,6 +31,10 @@ export const ChrisList = () => {
 				console.log("arrayWithFBID", arrayWithFBID);
 				setJournalArray(arrayWithFBID)
 			})
+	}
+
+	useEffect(() => {
+		getAllJournalEntries()
 	}, [])
 
 	//cycle through the colors for each card
@@ -50,7 +60,7 @@ export const ChrisList = () => {
 						const mybgcolor = cyleBackgroundColor();
 						
 						return (
-							<ChrisItem item={item} bgcolor={mybgcolor} key={item.fbid}/>
+							<ChrisItem item={item} bgcolor={mybgcolor} key={item.fbid} iGotIt={iGotIt}/>
 							
 							
 						)

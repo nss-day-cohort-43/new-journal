@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Container, Row, Col } from 'react-bootstrap';
 import { useHistory, Link } from "react-router-dom";
 import { FirebaseContext } from "./FirebaseProvider";
 
@@ -27,13 +27,15 @@ export default function Login() {
   return (
 
     <>
-      <h3>Please sign in.</h3>
-      
-      <div className="login-options">
-        <div className="border-option">
+    <Container fluid="xl">
+    
+    
+      <Row >
+        <Col className="m-2" md={6}>
+        <h5 className="username">Please sign in.</h5>
           <Form onSubmit={loginSubmit} >
             <fieldset>
-              <Form.Group controlId="formBasicEmail">
+              <Form.Group controlId="formBasicEmail" class="mb-2">
                 <Form.Control type="email" placeholder="Email Address" onChange={e => setEmail(e.target.value)} />
               </Form.Group>
 
@@ -45,16 +47,19 @@ export default function Login() {
               
             </fieldset>
           </Form>
-          <hr />
-          <em>
-            No account? <Link to="register">Create one with your email.</Link>
-          </em>
-          <div className="d-flex p-2 flex-wrap">
-            <hr />
-            <Button className="btn-block" onClick={loginGoogle} variant="outline-primary">Continue with Google</Button>
-          </div>
-        </div>
-      </div>
+        </Col>
+
+        <Col className="m-2">
+        <h5 className="username">
+            Need an account? 
+        </h5>
+          <Link to="register" className="btn btn-block btn-outline-success">Create one with your email</Link>
+          
+            <Button block onClick={loginGoogle} variant="outline-success">Continue with Google</Button>
+         
+       </Col>
+      </Row>
+      </Container>
     </>
   );
 }

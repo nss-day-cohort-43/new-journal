@@ -1,32 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
-import { updateGotIt } from './../../modules/APICalls';
 
-export const ChrisItem = ({item, bgcolor}) => {
+export const ChrisItem = ({item, bgcolor, iGotIt}) => {
+
+	//controls the clickable-ness of the checkbox
+	const [isLoading, setIsLoading] = useState(true);
+
+	const handleGotIt = (event) => {
+		setIsLoading(true);
+		//make a copy of original data
+		const updatedItem = {...item}
+		//set value to opposite
+		updatedItem.gotIt = updatedItem.gotIt ? false : true;
+		//invoke function on parent
+		//why is it on the parent? So that when it finishes the update,
+		//we can invoke getAll and update the ChrisList state
+		iGotIt(updatedItem)
 	
-
-	const [gotIt, setGotIt] = useState(item.gotIt || false);
-
-	const handleGotIt = (event) => {
-		const itemFBID = event.target.id.split("--")[1];
-		setGotIt(gotIt ? false : true);
-		item.gotIt = gotIt ? false : true;
-		console.log("item", item);
-
-		// updateGotIt(itemFBID, {gotIt:gotIt})
 	}
 
-
-
-
-	const [listItem, setListItem] = useState({item});
-
-	const handleGotIt = (event) => {
-		const itemFBID = event.target.id.split("--")[1];
-		item.gotIt = item.gotIt ? false : true;
-		updateGotIt(item);
-		
-	}
+	useEffect(() => {
+		setIsLoading(false)
+	},[item])
 
 
 	//date info: https://www.tutorialspoint.com/es6/es6_date.htm
@@ -42,9 +37,8 @@ export const ChrisItem = ({item, bgcolor}) => {
 			</Card.Body>
 			<Card.Body className="text-right">
 
-				<input id={`cb-${item.fbid}`} type='checkbox' className="mycheck" onChange={handleGotIt} checked={item.gotIt} />
+				<input id={`cb-${item.fbid}`} type='checkbox' className="mycheck" onChange={handleGotIt} checked={item.gotIt} disabled={isLoading}/>
 				<label htmlFor={`cb-${item.fbid}`}>I got it!</label>
-
 			</Card.Body>
 		</Card>
 	)
