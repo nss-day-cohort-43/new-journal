@@ -7,8 +7,6 @@ import { FirebaseProvider } from "./components/fbAuth/FirebaseProvider";
 
 function App() {
 
-  //<Route path={process.env.PUBLIC_URL + ‘/’}>
-
   return (
     <div className="App">
       <Router>

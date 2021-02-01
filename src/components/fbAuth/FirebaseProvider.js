@@ -53,7 +53,6 @@ export const FirebaseProvider = (props) => {
         setIsLoggedIn(true);
       });
   };
-
   
 
   const signInWithGoogle = () => {

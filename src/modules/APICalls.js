@@ -1,7 +1,11 @@
+/*
+Using Firebase as a JSON API with fetch calls
+*/
+
 import firebase from "firebase/app";
 import { firebaseConfig } from "./../components/fbAuth/firebaseConfig";
 
-
+console.log("fb",firebase);
 const dataURL = firebaseConfig.databaseURL;
 
 //https://firebase.google.com/docs/reference/rest/database
@@ -17,10 +21,15 @@ export const getAll = () => {
 	
 	// https://firebase.google.com/docs/database/rest/retrieve-data?authuser=0
 	// combine orderBy with any of the other five parameters: limitToFirst, limitToLast, startAt, endAt, and equalTo
-
 	return fetch(`${dataURL}/christList.json/?orderBy="uid"&equalTo="${firebase.auth().currentUser.uid}"`)
 	.then(response => response.json())
 	
+}
+
+export const getOneItem = (fbid) => {
+	console.log("getone", fbid);
+	return fetch(`${dataURL}/christList/${fbid}.json`)
+	.then(response => response.json())
 }
 
 export const addItem = (itemObj) => {
@@ -33,7 +42,7 @@ export const addItem = (itemObj) => {
 	}).then(response => response.json())
 }
 
-export const updateGotIt = (itemObj) => {
+export const updateItem = (itemObj) => {
 	//we don't want to add the firebase key to the item object on firebase(duplication of data) so, 
 	//make a reference to the fbid and then remove it from the object
 	const fbid = itemObj.fbid;

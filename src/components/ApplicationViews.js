@@ -5,6 +5,7 @@ import Login from "./fbAuth/Login";
 import Register from "./fbAuth/Register";
 import { ChrisList } from "./journal/ChrisList";
 import { ChrisListAddForm } from "./journal/ChrisListAddForm";
+import { ChrisItemUpdate } from "./journal/ChrisItemUpdate";
 
 
 export default function ApplicationViews() {
@@ -27,6 +28,10 @@ export default function ApplicationViews() {
 
         <Route path="/add">
           {isLoggedIn ? <ChrisListAddForm /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/chrisItem/edit/:chrisItemId">
+          {isLoggedIn ? <ChrisItemUpdate /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/login">

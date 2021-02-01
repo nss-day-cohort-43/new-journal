@@ -33,7 +33,7 @@ export default function Login() {
         <h5 className="username">Please sign in.</h5>
         <Form onSubmit={loginSubmit} >
           <fieldset>
-            <Form.Group controlId="formBasicEmail" class="mb-2">
+            <Form.Group controlId="formBasicEmail" className="mb-2">
               <Form.Control type="email" placeholder="Email Address" onChange={e => setEmail(e.target.value)} />
             </Form.Group>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container } from 'react-bootstrap';
-import { getAll, updateGotIt, deleteItem } from './../../modules/APICalls';
+import { getAll, updateItem, deleteItem } from './../../modules/APICalls';
 import firebase from "firebase";
 import { ChrisItem } from "./ChrisItem"
 
@@ -9,7 +9,7 @@ export const ChrisList = () => {
 	const [journalArray, setJournalArray] = useState([])
 
 	const iGotIt = (item) => {
-		updateGotIt(item)
+		updateItem(item)
 			.then(() => {
 				getAllJournalEntries();
 			});

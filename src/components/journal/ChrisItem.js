@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
+import { Link as RRLink } from "react-router-dom";
 
 export const ChrisItem = ({ item, bgcolor, iGotIt, deleteThisItem }) => {
 
@@ -27,7 +28,6 @@ export const ChrisItem = ({ item, bgcolor, iGotIt, deleteThisItem }) => {
 		setIsLoading(false)
 	}, [item])
 
-
 	//date info: https://www.tutorialspoint.com/es6/es6_date.htm
 	return (
 
@@ -44,6 +44,7 @@ export const ChrisItem = ({ item, bgcolor, iGotIt, deleteThisItem }) => {
 					<input id={`cb-${item.fbid}`} type='checkbox' className="mycheck" onChange={handleGotIt} checked={item.gotIt} disabled={isLoading} />
 					<label htmlFor={`cb-${item.fbid}`}>I got it!</label>
 				</div>
+				<div><RRLink className="btn ouline-lite btn-sm" style={{ width: "7.25em" }} disabled={isLoading} to={`/chrisItem/edit/${item.fbid}`}>Edit</RRLink></div>
 				<div><Button onClick={handleDelete} variant="outline-lite" size="sm" style={{ width: "7.25em" }} disabled={isLoading}>Remove</Button></div>
 			</Card.Body>
 		</Card>
