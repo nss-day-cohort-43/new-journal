@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+# A New Journal Dawns As A Christmas List
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project utilizes React, Firebase Authentication, and usage of FirebaseDB as an API with fetch calls.
 
-## Available Scripts
+## Firebase Setup
+1. Create new real-time database.
+1. Set the rules to true
+1. For your project: `npm install firebase`
+1. Copy the config object and replace in `components/fbAuth/firebaseConfig.js`
 
-In the project directory, you can run:
+```
+export const firebaseConfig = {
+    apiKey: "REALLY-LONG-VALUE",
+    authDomain: "YOUR-DATABASE.firebaseapp.com",
+    databaseURL: "https://YOUR-DATABASE.firebaseio.com",
+    projectId: "YOUR-DATABASE",
+    storageBucket: "YOUR-DATABASE.appspot.com",
+    messagingSenderId: "REALLY-LONG-NUMBER",
+    appId: "YOUR-APPID"
+  }
+  ```
 
-### `npm start`
+## Initialize Your App
+1. Within your main app component, initialize Firebase with your configuration.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+import { firebaseConfig } from "./components/fbAuth/firebaseConfig";
+import firebase from "firebase/app";
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+firebase.initializeApp(firebaseConfig);
+```
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Firebase Authentication
+Once our app is initialized, firebase methods can be used to authenticate users and maintain the state of the logged in user.
 
-### `npm run build`
+1. Create a `FirebaseProvider` component with `useState()` for `isLoggedIn`
+1. `useEffect` confirms the app is ready
+1. Each login and logout method updates the state of `isLoggedIn`
+1. Firebase provides methods for logging in with various providers including Google as well as email/password.
+1. Wrap the app with `FirebaseProvider`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> App.js
+```
+ <Router>
+	<FirebaseProvider>
+		<Header />
+		<ApplicationViews />
+	</FirebaseProvider>
+</Router>
+```
+## Check for a user and display views
+`ApplicationViews` imports the `isLoggedIn` state from the `FirebaseProvider`. This can be evaluated and display content.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> ApplicationViews.js
+```
+<Route path="/home">
+	{isLoggedIn ? <ChrisList /> : <Redirect to="/login" />}
+</Route>
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Access database with fetch calls
+Similar to json-server, make fetch calls to Firebase.
 
-### `npm run eject`
+> modules/APICalls.js
+```
+return fetch(`${dataURL}/christList.json/?orderBy="uid"&equalTo="${firebase.auth().currentUser.uid}"`)
+.then(response => response.json())
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* Combine `orderBy` with any of the other five parameters: `limitToFirst, limitToLast, startAt, endAt, and equalTo`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Firebase Data and Key
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Firebase returns an object. Before we can `map` over the data, it needs to be converted to an array. Simultaneously, we can add the Firebase key as a property on each object.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+> components/journal/ChrisList.js
 
-## Learn More
+```
+let arrayWithFBID = Object.keys(data).map((key, index) => {
+	data[key].fbid = key;
+	return data[key];
+});
+	
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
