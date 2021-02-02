@@ -69,6 +69,7 @@ return fetch(`${dataURL}/christList.json/?orderBy="uid"&equalTo="${firebase.auth
 ```
 
 * Combine `orderBy` with any of the other five parameters: `limitToFirst, limitToLast, startAt, endAt, and equalTo`
+* Review the other API calls.
 
 ## Firebase Data and Key
 
